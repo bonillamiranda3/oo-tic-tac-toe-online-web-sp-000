@@ -3,7 +3,6 @@ class TicTacToe
   def initialize
     @board = Array.new(9) {" "}
   end
-
   def play
     until over? || won?
       turn
@@ -13,38 +12,37 @@ class TicTacToe
     puts "Congratulations O!" if winner == "O"
   end
 
-def winner
-  hold_array = []
-
-  WIN_COMBINATIONS.each do |combo|
-    combo.each do |index|
-      hold_array << board[index] if position_taken?(index)
-    end
-    if hold_array.length == 3 && hold_array.uniq.length == 1
-      winner = hold_array.uniq.first
-      return winner
-    else
-      hold_array.clear
-    end
-  end
-  nil
-end
-
-def over?
-  return true if won?
-  return true if draw?
-end
-
-def won?
-  hold_array = []
-
+  def winner
+    hold_array = []
 
     WIN_COMBINATIONS.each do |combo|
       combo.each do |index|
         hold_array << board[index] if position_taken?(index)
-      end
+        end
+        
       if hold_array.length == 3 && hold_array.uniq.length == 1
         winner = hold_array.uniq.first
+        return winner
+        else
+        hold_array.clear
+      end
+    end
+    nil
+  end
+
+  def over?
+    return true if won?
+    return true if draw?
+  end
+
+    def won?
+    hold_array = []
+
+    WIN_COMBINATIONS.each do |combo|
+      combo.each do |index|
+        hold_array << board[index] if position_taken?(index)
+        end
+      if hold_array.length == 3 && hold_array.uniq.length == 1
         return combo
       else
         hold_array.clear
@@ -53,34 +51,33 @@ def won?
     false
   end
 
-def full?
-  board.all? { |pos| pos == "X" || pos == "O"}
-end
-
-def draw?
-  if full? && !won?
-    return true
-  else
-    return false
+   def full?
+    board.all? { |pos| pos == "X" || pos == "O" }
   end
-end
 
-def player_move(index, token)
-  board[index] = token
-end
+  def draw?
+    if full? && !won?
+      return true
+    else
+      return false
+    end
+  end
+  
+  def current_player(board)
+    count = turn_count(board)
+    return "X" if count.even?
+    return "O" if count.odd?
+  end
 
-def current_player(board)
-  count = turn_count(board)
-  return "X" if count.even?
-  return "O" if count.odd?
-end
+  def player_move(index, token)
+    board[index] = token
+  end
 
-def turn
+  def turn
     puts "Please enter 1-9:"
     input = gets.strip
     index = input_to_index(input)
     token = current_player
-
     unless valid_move?(index)
       turn
     else
@@ -89,15 +86,16 @@ def turn
     end
   end
 
+
   WIN_COMBINATIONS = [
-    [0,1,2],
+    [0,1,2], 
     [3,4,5],
-    [6,7,8],
-    [0,4,8],
+    [6,7,8], 
+    [0,4,8], 
     [6,4,2],
-    [0,3,6],
-    [7,4,1],
-    [2,5,8]
+    [0,3,6], 
+    [7,4,1], 
+    [2,5,8] 
   ]
 
   def display_board
