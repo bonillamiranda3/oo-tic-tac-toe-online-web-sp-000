@@ -19,7 +19,7 @@ class TicTacToe
       combo.each do |index|
         hold_array << board[index] if position_taken?(index)
         end
-        
+
       if hold_array.length == 3 && hold_array.uniq.length == 1
         winner = hold_array.uniq.first
         return winner
@@ -62,7 +62,7 @@ class TicTacToe
       return false
     end
   end
-  
+
   def current_player(board)
     count = turn_count(board)
     return "X" if count.even?
@@ -88,14 +88,14 @@ class TicTacToe
 
 
   WIN_COMBINATIONS = [
-    [0,1,2], 
+    [0,1,2],
     [3,4,5],
-    [6,7,8], 
-    [0,4,8], 
+    [6,7,8],
+    [0,4,8],
     [6,4,2],
-    [0,3,6], 
-    [7,4,1], 
-    [2,5,8] 
+    [0,3,6],
+    [7,4,1],
+    [2,5,8]
   ]
 
   def display_board
