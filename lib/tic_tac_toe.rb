@@ -45,7 +45,7 @@ def won?
       end
       if hold_array.length == 3 && hold_array.uniq.length == 1
         winner = hold_array.uniq.first
-        return winner
+        return combo
       else
         hold_array.clear
       end
