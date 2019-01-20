@@ -80,6 +80,7 @@ def turn
     input = gets.strip
     index = input_to_index(input)
     token = current_player
+
     unless valid_move?(index)
       turn
     else
